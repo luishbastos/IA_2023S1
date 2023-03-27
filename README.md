@@ -67,6 +67,8 @@ rogerio.oliveira@mackenzie.br
 
 **8** [Avaliação N1]()
 
+[RESUMO N1](https://github.com/Rogerio-mack/IA_2023S1/blob/main/Resumo_N1.md)
+
 **9** Feedback da N1
 
 **10** Redes Neurais
