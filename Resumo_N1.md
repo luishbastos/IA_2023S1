@@ -14,12 +14,13 @@ rogerio.oliveira@mackenzie.br
 
 **1** [**Introdução à Inteligência Artificial: conceito, história e paradigmas**](https://colab.research.google.com/github/Rogerio-mack/Inteligencia_Artificial/blob/main/IA_Introducao.ipynb) 
 
-- IA $\times$ ML $\times$ Deep Learning
-- IA Fraca $\times$ IA Forte
-- ML $\times$ Data Science
-- Aplicações ou Tarefas: **Regressão, Classificação,** Clusterização, Regras de Associação, Detecção de Anomalias, Matching etc.
-- CRISP DM, 6 fases, **não linear**
-- Aprendizado: 
+- IA $\times$ ML $\times$ Deep Learning -> IA é apenas usando lógicamente basicamente, no ML a gente aprende com os dados, a inteligência é extraída a partir dos dados, lendo eles e pegando os padrões, Deep learning é uma parte de ML
+- IA Fraca $\times$ IA Forte -> Forte seria a IA ter consciência 
+- ML $\times$ Data Science -> Ciência de dados engloba outras tarefas sobre os dados, dentre elas o CRISPM DM (Parte de preparação e conhecimento)
+- Como avalio os modelos de ML
+- Aplicações ou Tarefas de ML: **Regressão, Classificação,** Clusterização, Regras de Associação, Detecção de Anomalias, Matching etc.
+- CRISP DM, 6 fases, **não linear** -> As fases se conversam, vou e volto entre elas 
+- Aprendizado: -> O que é cada tipo
   - **Supervisionado:** **Regressão, Classificação** (Conjunto de Treinamento: Exemplos)
   - Não Supervisionado
   - Com Reforço 
@@ -31,12 +32,12 @@ rogerio.oliveira@mackenzie.br
 
 **3** [**Python Pandas e Matplotlib**](https://colab.research.google.com/github/Rogerio-mack/Inteligencia_Artificial/blob/main/IA_Python_2.ipynb)
 
-- `Pandas`
+- `Pandas` 
   - Seleção de Dados: `df[ <predicado lógico> ][ <lista de colunas ]`, `tips[ df.tip > df.tip.mean() ][['total_bill','tip','sex']]`
   - `nlargest()` `nsmallest`
-  - `pd.concat()`
   - `pd.merge()`
   - `df.groupby()`
+  - `df.describe(include ='all')`
 
 - `Matplotlib`
   - None!
@@ -46,45 +47,44 @@ rogerio.oliveira@mackenzie.br
 - Aprendizado Supervisionado $\rightarrow$ Conjunto de Treinamento, Dados rotulados
 - **Esquema Geral dos Modelos Supervisionados**
 - Regressão $\times$ |Classificação
-- Regressão Linear Simples e Múltipla $y = a_0 + a_1 x_1 + ... + a_n x_n$
-- Regressão Linear: Transformações da variável **dependente**, **OK**, já das **preditoras (ou independentes), NOK**
+- Regressão Linear Simples e Múltipla $y = a_0 + a_1 x_1 + ... + a_n x_n$ **Estes coeficientes diminuem a reta**
+- Regressão Linear: Transformações da variável **dependente**, **posso**, já das **preditoras (ou independentes), Não posso**
 - Coeficientes $\rightarrow$ Minimização do Erro
-- Coeficiente de Determinação, **$R2$**
-  - R2 ajustado: None!
+- Coeficiente de Determinação, **$R2$** -> 
+  - R2 ajustado: None! -> Não cai
   - R2 $\in [0,1]$
-  - p-value $< 0.05$ para os coeficientes
-  - R2 = 0? Não há relação?
-  - R2 = 1? Causa-Efeito? 
- - Variáveis Categóricas $\rightarrow$ Hot Encode  
- - Simple Code: `model = sm.ols('y ~ x',data=df; r = model.fit()`
+  - p-value $< 0.05$ para os coeficientes -> Se o coeficiente é ou não significativo, precisar ser < 0.05 para ser significativo
+  - R2 = 0? Não há relação? -> Não há relação linear, mas pode haver relação 
+  - R2 = 1? Causa-Efeito? -> Não, 
+ - Variáveis Categóricas $\rightarrow$ Hot Encode nelas para poder usar 
+ - Simple Code: `model = sm.ols('y ~ x',data=df); r = model.fit()` -> só preciso entender isso (independente aparece com o +
 
 **5** [**Classificação: Regressão Logística**](https://colab.research.google.com/github/Rogerio-mack/Machine-Learning-I/blob/main/ML3_RegressaoLogistica.ipynb)
 
 - **Esquema Geral dos Modelos Supervisionados**
+- Tenho uma regressão linear onde eu apliquei uma logística
 - Estimando os parâmetros, quais?
 - **Esquema Geral dos Estimadores no `scikit-learn`
 
 ```
-from sklearn.linear_model import LogisticRegression
+from sklearn.linear_model import LogisticRegression 
+from sklearn.model_selection import train_test_split
 
-# Entradas e Saídas
-X = df[['radius_mean', 'texture_mean', 'perimeter_mean']]
-y = df['diagnosis']
+X = df[['x1','x2']]
+y = df.y
 
-# Definição
-clf = LogisticRegression()
+X_train, X_test, y_train, y_test = train_test_split(X, y, stratify=y, test_size=0.3, random_state=123)
 
-# Treinamento
-clf.fit(X,y)
+clf = LogisticRegression(max_iter=1000)
 
-# Avaliação
-y_pred = clf.predict(X)
+clf.fit(X_train,y_train)
 
-# Score do Modelo, Acuracidade
-acc = clf.score(X,y)
+y_pred = clf.predict(X_test)
+
+print( clf.score(X_test,y_test) )
 ```
 
-- Regressão Logística: **Classificador ou Separador Linear**
+- Regressão Logística: **Ele é Classificador ou Separador Linear**
 - Regressão Logística: Normalização $\leftarrow$ sim, é sensível à normalização
 - Regressão Logística: **Classificador binário**
 - Regressão Logística: variáveis preditoras numéricas, mas a dependente não necessariamente
