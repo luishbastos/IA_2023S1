@@ -39,9 +39,6 @@ rogerio.oliveira@mackenzie.br
   - `df.groupby()`
   - `df.describe(include ='all')`
 
-- `Matplotlib`
-  - None!
-
 **4** [**Aprendizado Supervisionado e Regressão Linear**](https://colab.research.google.com/github/Rogerio-mack/Machine-Learning-I/blob/main/ML2_Regressao.ipynb)
 
 - Aprendizado Supervisionado $\rightarrow$ Conjunto de Treinamento, Dados rotulados
